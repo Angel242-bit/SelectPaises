@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/Style.css">
+    <title>Document</title>
+</head>
+<body>
+    <form name = "formulario1" action="#">
+         <select name="cosa" onchange="cambia()">
+            <option value="0">Seleccione un Pais</option>
+            <option value="1"> Mexico</option>
+            
+         </select>
+
+         <select name="opt" onchange="cambia2()">
+            <option value="-">-</option>
+
+         </select>
+
+         <select name="ops" onchange="cambia3()">
+            <option value="-">-</option>
+
+         </select>
+
+         <select name="opg">
+            <option value="-">-</option>
+
+         </select>
+
+         <button type="button" onclick="imprimirDatos()">Imprimir Datos</button>
+
+         <br>
+ 
+         <input type="text" id="datosSeleccionados" readonly>
+
+    </form>
+
+    <script type="text/javascript">
+        var opt_1 = new Array("-", "Hidalgo", "Queretaro", "Veracruz", "...");
+
+        var ops_1 = new Array("-", "Actopan", "Tulancingo", "Pachuca","...");
+        var ops_2 = new Array("-", "Arroyo Seco", "Huimilpan", "Corregidora","...");
+        var ops_3 = new Array("-", "Perote", "Veracruz", "Misantla","...");
+
+        var opg_1 = new Array("-", "La Loma", "Dos Cerritos", "La Peña", "...");
+        var opg_2 = new Array("-", "Ojo de Agua", "Chimilpa", "Maroja", "...");
+        var opg_3 = new Array("-", "El Roble", "El Tablon", "El Puerto", "...");
+        var opg_4 = new Array("-", "Ayutla", "Conca", "El barrito", "...");
+        var opg_5 = new Array("-", "Calupa", "Ceja de Bravo", "Lagunillas", "...");
+        var opg_6 = new Array("-", "Bravo", "Buenos Aires", "La Cueva", "...");
+        var opg_7 = new Array("-", "Don Flavio", "Dos Aguas", "El Canal", "...");
+        var opg_8 = new Array("-", "Arboledas", "Las Torres", "Las Bajadas", "...");
+        var opg_9 = new Array("-", "Arroyo Hondo", "Arroyo Negro", "Bella Vista", "...");
+
+        function cambia(){
+            var cosa;
+
+            cosa = document.formulario1.cosa[document.formulario1.cosa.selectedIndex].value
+
+            if(cosa != 0){
+                mis_opts = eval("opt_" + cosa);
+                num_opts = mis_opts.length;
+                document.formulario1.opt.length = num_opts;
+
+                for(i = 0; i < num_opts; i++){
+                    document.formulario1.opt.options[i].value = mis_opts[i];
+                    document.formulario1.opt.options[i].text = mis_opts[i];
+
+                }
+
+            }else{
+               document.formulario1.opt.length = 1;
+               document.formulario1.opt.options[0].value = "-";     
+            }
+
+            document.formulario1.opt.options[0].selected = true;
+            cambia2();
+        }
+
+        function cambia2() {
+            var optValue = document.formulario1.opt[document.formulario1.opt.selectedIndex].value;
+            var opsArray;
+    
+            switch (optValue) {
+                case "Hidalgo":
+                    opsArray = ops_1;
+                    break;
+                case "Queretaro":
+                    opsArray = ops_2;
+                    break;
+                case "Veracruz":
+                    opsArray = ops_3;
+                    break;
+                default:
+                    opsArray = new Array("-");
+            }
+    
+            num_ops = opsArray.length;
+            document.formulario1.ops.length = num_ops;
+    
+            for (j = 0; j < num_ops; j++) {
+                document.formulario1.ops.options[j].value = opsArray[j];
+                document.formulario1.ops.options[j].text = opsArray[j];
+            }
+
+            document.formulario1.ops.options[0].selected = true;
+            cambia3(); 
+        }
+        
+        function cambia3() {
+            var opsValue = document.formulario1.ops[document.formulario1.ops.selectedIndex].value;
+            var cuartoOpsArray;
+    
+            switch (opsValue) {
+                case "Actopan":
+                    cuartoOpsArray = opg_1;
+                    break;
+                case "Tulancingo":
+                    cuartoOpsArray = opg_2;
+                    break;
+                case "Pachuca":
+                    cuartoOpsArray = opg_3;
+                    break;
+                case "Arroyo Seco":
+                    cuartoOpsArray = opg_4;
+                    break;
+                case "Huimilpan":
+                    cuartoOpsArray = opg_5;
+                    break;
+                case "Corregidora":
+                    cuartoOpsArray = opg_6;
+                    break;
+                case "Perote":
+                    cuartoOpsArray = opg_7;
+                    break;
+                case "Veracruz":
+                    cuartoOpsArray = opg_8;
+                    break;
+                case "Misantla":
+                    cuartoOpsArray = opg_9;
+                    break;
+
+                default:
+                    cuartoOpsArray = new Array("-");
+            }
+    
+            num_cuarto_ops = cuartoOpsArray.length;
+            document.formulario1.opg.length = num_cuarto_ops;
+    
+            for (k = 0; k < num_cuarto_ops; k++) {
+                document.formulario1.opg.options[k].value = cuartoOpsArray[k];
+                document.formulario1.opg.options[k].text = cuartoOpsArray[k];
+            }
+        }
+
+        function imprimirDatos() {
+            var pais = document.formulario1.cosa[document.formulario1.cosa.selectedIndex].text;
+            var estado = document.formulario1.opt[document.formulario1.opt.selectedIndex].text;
+            var ciudad = document.formulario1.ops[document.formulario1.ops.selectedIndex].text;
+            var localidad = document.formulario1.opg[document.formulario1.opg.selectedIndex].text;
+
+            var datosSeleccionados = "País: " + pais + "-" + " Estado: " + estado + "-" +" Ciudad: " + ciudad + "-" + " Localidad: " + localidad;
+
+            document.getElementById("datosSeleccionados").value = datosSeleccionados;
+        }
+
+     </script>
+</body>
+</html>
